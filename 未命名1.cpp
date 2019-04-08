@@ -103,9 +103,9 @@ int main(void)
 	}
 	
 	// 输出结果
-	if(k1) cout << "a1 " << asin(a1)*180/PI << endl;
-	if(k2) cout << "a2 " << asin(a2)*180/PI << endl;
-	if(k3) cout << "a3 " << asin(a3)*180/PI << endl; 
+	if(k1) cout << "a1 " << 0-asin(a1)*180/PI << endl;
+	if(k2) cout << "a2 " << 0-asin(a2)*180/PI << endl;
+	if(k3) cout << "a3 " << 0-asin(a3)*180/PI << endl; 
 	
 	if( !( k1 || k2 || k3 ) ) cout << "No" << endl; // 三个都有障碍物 
 	
