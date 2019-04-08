@@ -35,7 +35,7 @@ int main(void)
 	cin >> my.x >> my.y;
 	getchar();
 
-	vector<COOR> d;
+	vector<COOR> other_car;
 	string str;
 	int i = 0;
 	getline(cin,str);
@@ -56,10 +56,10 @@ int main(void)
         }
         t.x = tx;
         t.y = ty;
-        d.push_back(t);
+        other_car.push_back(t);
     }
 
-	vector< vector<COOR> > v; // 相当于一个二维数组，v[0] v[1] 。。各表示一个障碍物的坐标
+	vector< vector<COOR> > every_barrier; // 相当于一个二维数组，v[0] v[1] 。。各表示一个障碍物的坐标
 	i = 0;
 	while( 1 ) {
 		getline(cin,str);
@@ -85,20 +85,20 @@ int main(void)
 			t.y = ty;
 			tmp.push_back(t);
 		}
-        v.push_back(tmp);
+        every_barrier.push_back(tmp);
 		i++;
 	}
 
 	// 处理数据
 	// 先保存自身和目的地点的连线夹角
-	vector<double> b;
-	for( coor t : d ) { // 范围for处理 目的地的坐标
-        b.push_back(SIN(my,t));
+	vector<double> other_sin;
+	for( coor t : other_car ) { // 范围for处理 目的地的坐标
+        other_sin.push_back(SIN(my,t));
 	}
 
 	// 处理障碍物
-	vector<ANGLE> a;
-    for( vector<COOR> t : v ) { // 处理障碍物的坐标
+	vector<ANGLE> barrier_sin;
+    for( vector<COOR> t : every_barrier ) { // 处理障碍物的坐标
         ANGLE tmp;
         double maxt = -10, mint = 10;
         for( COOR c : t ) { // 处理一个障碍物的每个坐标 从中找出自己和障碍物每个点连线的角度最大的和最小的
@@ -108,13 +108,13 @@ int main(void)
         }
         tmp.maxAngle = maxt;
         tmp.minAngle = mint;
-        a.push_back(tmp);
+        barrier_sin.push_back(tmp);
     }
 
 	vector<double> yes; // 存储自身与目的地连线之间没有障碍物的连线的角度
-	for( double t : b ) {
+	for( double t : other_sin ) {
         int k = 1;
-        for( ANGLE tA : a ) {
+        for( ANGLE tA : barrier_sin ) {
             if( t <= tA.maxAngle && t <= tA.minAngle ) k = 0;
         }
         if( k )
