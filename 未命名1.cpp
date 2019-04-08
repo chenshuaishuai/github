@@ -41,7 +41,30 @@ int main(void)
 	vector<COOR> v;
 	string str;
 	while( 1 ) {
+		
 		getline(cin,str);
+		if( str.length() == 0 ) break;
+		for( int i = 0; i < str.size(); i++ ) {
+			COOR t;
+			int tx = 0,ty = 0;
+			while(str[i] != ' ') { // x
+				int m = str[i] - '0';
+				tx = tx*10+m;
+				i++;
+			} 
+			i++;
+			while(str[i] != ' ') { // y
+				int m = str[i] - '0';
+				ty = ty*10+m;
+				i++;
+				if(i == str.size()) break;
+			}
+			t.x = tx;
+			t.y = ty;
+			cout << t.x << ' ' << t.y << endl;
+			v.push_back(t);
+		}
+		/*getline(cin,str);
 		if( str.length() == 0 ) break;
 		for( int i = 0; i < str.length(); i += 4 ) {
 			COOR t;
@@ -49,6 +72,7 @@ int main(void)
 			t.y = str[i+2] - '0';
 			v.push_back(t);
 		}
+		*/
 	}
 	
 	// 处理数据
