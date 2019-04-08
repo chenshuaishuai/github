@@ -115,7 +115,7 @@ int main(void)
 	for( double t : other_sin ) {
         int k = 1;
         for( ANGLE tA : barrier_sin ) {
-            if( t <= tA.maxAngle && t <= tA.minAngle ) k = 0;
+            if( t <= tA.maxAngle && t >= tA.minAngle ) k = 0;
         }
         if( k )
             yes.push_back(t);
